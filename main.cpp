@@ -9,13 +9,9 @@
  * of the Licence, or (at your option) any later version.
  */
 
-#include <iostream>
-#include <memory>
 #include "app.h"
 #include "cleaner.h"
 #include "configs.h"
-
-using namespace std;
 
 
 int main(void)

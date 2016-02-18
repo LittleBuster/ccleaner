@@ -18,7 +18,7 @@
 
 void Configs::load(const string &fname)
 {
-    std::ifstream ifs;
+    ifstream ifs;
     boost::property_tree::ptree pt;
 
     ifs.open(fname);
