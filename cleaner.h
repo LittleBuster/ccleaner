@@ -14,6 +14,7 @@
 
 #include <string>
 #include <boost/asio.hpp>
+#include <boost/filesystem.hpp>
 
 using namespace std;
 using namespace boost::asio;
@@ -24,7 +25,7 @@ class ICleaner
 public:
     virtual void setParams(unsigned interval, const string &folder1, const string &folder2) = 0;
     virtual void start(void) = 0;
-    virtual void clean(void) = 0;
+    virtual void clean(void) const = 0;
 };
 
 
@@ -36,6 +37,11 @@ private:
     unsigned interval;
     string folder1;
     string folder2;
+
+    /*
+     * Removing all files in path
+     */
+    void removeFiles(const boost::filesystem::path &path) const;
 
 public:
     /**
@@ -58,7 +64,7 @@ public:
     /*
      * Clean timer callback
      */
-    void clean(void);
+    void clean(void) const;
 };
 
 

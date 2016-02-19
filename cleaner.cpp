@@ -12,10 +12,22 @@
 #include "cleaner.h"
 #include <iostream>
 #include <boost/bind.hpp>
-#include <boost/filesystem.hpp>
 
-using namespace std;
 
+void Cleaner::removeFiles(const boost::filesystem::path &path) const
+{
+    if (boost::filesystem::is_directory(path)) {
+        boost::filesystem::directory_iterator end_iter;
+        for (boost::filesystem::directory_iterator dir_itr(path); dir_itr != end_iter; ++dir_itr) {
+            try {
+                boost::filesystem::remove_all(*dir_itr);
+            }
+            catch (...) {
+                cout << "Error removing file." << endl;
+            }
+        }
+    }
+}
 
 void Cleaner::start()
 {
@@ -24,20 +36,11 @@ void Cleaner::start()
     io.run();
 }
 
-void Cleaner::clean()
+void Cleaner::clean() const
 {
-    try {
-        boost::filesystem::remove(boost::filesystem::path(folder1));
-    }
-    catch (...) {
-        cout << "Can not delete folder \"" << folder1 << "\"" << endl;
-    }
-    try {
-        boost::filesystem::remove(boost::filesystem::path(folder2));
-    }
-    catch (...) {
-        cout << "Can not delete folder \"" << folder2 << "\"" << endl;
-    }
+    removeFiles(boost::filesystem::path(folder1));
+    removeFiles(boost::filesystem::path(folder2));
+
     timer->expires_at(timer->expires_at() + boost::posix_time::seconds(this->interval));
     timer->async_wait(boost::bind(&Cleaner::clean, this));
 }

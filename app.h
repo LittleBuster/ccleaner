@@ -26,7 +26,7 @@ private:
     shared_ptr<ICleaner> m_cleaner;
 
 public:
-    App(const shared_ptr<IConfigs> &cfg, const shared_ptr<ICleaner> &cleaner);
+    explicit App(const shared_ptr<IConfigs> &cfg, const shared_ptr<ICleaner> &cleaner);
 
     int start(void);
 };

@@ -27,7 +27,7 @@ typedef struct {
 class IConfigs
 {
 public:
-    virtual CleanCfg* getCleanCfg(void) = 0;
+    virtual const CleanCfg* getCleanCfg(void) const = 0;
     virtual void load(const string &fname) = 0;
 };
 
@@ -41,7 +41,7 @@ public:
     /*
      * Get configs
      */
-    inline CleanCfg* getCleanCfg(void) {
+    inline const CleanCfg* getCleanCfg(void) const {
         return &cc;
     }
 
