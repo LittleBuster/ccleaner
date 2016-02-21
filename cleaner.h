@@ -23,7 +23,7 @@ using namespace boost::asio;
 class ICleaner
 {
 public:
-    virtual void setParams(unsigned interval, const string &folder1, const string &folder2) = 0;
+    virtual inline void setParams(unsigned interval, const string &folder1, const string &folder2) = 0;
     virtual void start(void) = 0;
     virtual void clean(void) const = 0;
 };
